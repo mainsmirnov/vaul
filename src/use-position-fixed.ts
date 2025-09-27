@@ -41,10 +41,9 @@ export function usePositionFixed({
         () =>
           requestAnimationFrame(() => {
             // Attempt to check if the bottom bar appeared due to the position change
-            const bottomBarHeight = innerHeight - window.innerHeight;
-            if (bottomBarHeight && scrollPos.current >= innerHeight) {
+            if (scrollPos.current >= innerHeight) {
               // Move the content further up so that the bottom bar doesn't hide it
-              document.body.style.top = `${-(scrollPos.current + bottomBarHeight)}px`;
+              document.body.style.top = `${-(scrollPos.current)}px`;
             }
           }),
         300,
@@ -97,8 +96,8 @@ export function usePositionFixed({
     // This is needed to force Safari toolbar to show **before** the drawer starts animating to prevent a gnarly shift from happening
     if (isOpen) {
       // avoid for standalone mode (PWA)
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-      !isStandalone && setPositionFixed();
+      // const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      // !isStandalone && setPositionFixed();
 
       if (!modal) {
         setTimeout(() => {

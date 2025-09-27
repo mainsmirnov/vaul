@@ -238,11 +238,11 @@ function preventScrollMobileSafari() {
     }
   };
 
-  let onWindowScroll = () => {
+  // let onWindowScroll = () => {
     // Last resort. If the window scrolled, scroll it back to the top.
     // It should always be at the top because the body will have a negative margin (see below).
-    window.scrollTo(0, 0);
-  };
+    // window.scrollTo(0, 0);
+  // };
 
   // Record the original scroll position so we can restore it.
   // Then apply a negative margin to the body to offset it by the scroll position. This will
@@ -256,22 +256,22 @@ function preventScrollMobileSafari() {
     // setStyle(document.body, 'marginTop', `-${scrollY}px`),
   );
 
-  // Scroll to the top. The negative margin on the body will make this appear the same.
-  window.scrollTo(0, 0);
+  // // Scroll to the top. The negative margin on the body will make this appear the same.
+  // window.scrollTo(0, 0);
 
   let removeEvents = chain(
     addEvent(document, 'touchstart', onTouchStart, { passive: false, capture: true }),
     addEvent(document, 'touchmove', onTouchMove, { passive: false, capture: true }),
     addEvent(document, 'touchend', onTouchEnd, { passive: false, capture: true }),
     addEvent(document, 'focus', onFocus, true),
-    addEvent(window, 'scroll', onWindowScroll),
+    // addEvent(window, 'scroll', onWindowScroll),
   );
 
   return () => {
     // Restore styles and scroll the page back to where it was.
     restoreStyles();
     removeEvents();
-    window.scrollTo(scrollX, scrollY);
+    // window.scrollTo(scrollX, scrollY);
   };
 }
 
